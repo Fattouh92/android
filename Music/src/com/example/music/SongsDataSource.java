@@ -30,7 +30,7 @@ public class SongsDataSource {
     dbHelper.close();
   }
 
-  public Song createComment(String song_name, String artist_name, String album_name) {
+  public Song createSong(String song_name, String artist_name, String album_name) {
     ContentValues values = new ContentValues();
     values.put(MySQLiteHelper.SONG_NAME, song_name);
     values.put(MySQLiteHelper.ARTIST_NAME, artist_name);
