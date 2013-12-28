@@ -32,6 +32,9 @@ public class SongsDataSource {
 
   public Song createSong(String song_name, String artist_name, String album_name) {
     ContentValues values = new ContentValues();
+    //if (song_name.equals(null) || album_name.equals(null) || artist_name.equals(null)) {
+    	//return null;
+   //}
     values.put(MySQLiteHelper.SONG_NAME, song_name);
     values.put(MySQLiteHelper.ARTIST_NAME, artist_name);
     values.put(MySQLiteHelper.ALBUM_NAME, album_name);

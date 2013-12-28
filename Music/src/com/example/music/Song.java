@@ -41,6 +41,6 @@ public class Song {
 // Will be used by the ArrayAdapter in the ListView
   @Override
   public String toString() {
-    return song_name+" "+artist_name+" "+album_name;
+    return "You Listened to " + song_name+" "+artist_name+" "+album_name;
   }
 } 

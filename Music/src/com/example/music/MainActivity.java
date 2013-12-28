@@ -11,12 +11,12 @@ import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.view.ViewPager;
 import android.util.Log;
-import android.view.Menu;
  
 public class MainActivity extends FragmentActivity implements
         ActionBar.TabListener {
  
-    private ViewPager viewPager;
+	public static SongsDataSource datasource;
+	private ViewPager viewPager;
     private TabsPagerAdapter mAdapter;
     private ActionBar actionBar;
     // Tab titles
@@ -33,7 +33,10 @@ public class MainActivity extends FragmentActivity implements
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
- 
+        datasource = new SongsDataSource(this);
+        datasource.open();
+
+        
         // Initilization
         viewPager = (ViewPager) findViewById(R.id.pager);
         actionBar = getActionBar();
@@ -70,10 +73,19 @@ public class MainActivity extends FragmentActivity implements
             }
         });
         IntentFilter iF = new IntentFilter();
-		iF.addAction("com.android.music.metachanged");
-		iF.addAction("com.android.music.playstatechanged");
-		iF.addAction("com.android.music.playbackcomplete");
-		iF.addAction("com.android.music.queuechanged");
+        iF.addAction("com.android.music.metachanged");
+        
+        // MIUI music player
+        iF.addAction("com.miui.player.metachanged");
+ 
+        // HTC music player
+        iF.addAction("com.htc.music.metachanged");
+ 
+        // WinAmp
+        iF.addAction("com.nullsoft.winamp.metachanged");
+ 
+        // MyTouch4G
+        iF.addAction("com.real.IMP.metachanged");
 
 		registerReceiver(mReceiver, iF);
     }
@@ -89,6 +101,7 @@ public class MainActivity extends FragmentActivity implements
 			String album = intent.getStringExtra("album");
 			String track = intent.getStringExtra("track");
 			Log.d("Music", artist + ":" + album + ":" + track);
+			//datasource.createSong(track, artist, album);
 		}
 	};
  
@@ -106,5 +119,16 @@ public class MainActivity extends FragmentActivity implements
     @Override
     public void onTabUnselected(Tab tab, FragmentTransaction ft) {
     }
- 
+    
+    @Override
+    protected void onResume() {
+      datasource.open();
+      super.onResume();
+    }
+
+    @Override
+    protected void onPause() {
+      datasource.close();
+      super.onPause();
+    }
 }
