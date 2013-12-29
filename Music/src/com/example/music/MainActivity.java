@@ -11,6 +11,7 @@ import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.view.ViewPager;
 import android.util.Log;
+import android.widget.Toast;
  
 public class MainActivity extends FragmentActivity implements
         ActionBar.TabListener {
@@ -33,6 +34,30 @@ public class MainActivity extends FragmentActivity implements
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        IntentFilter iF = new IntentFilter();
+        
+        
+        iF.addCategory("ComponentInfo");
+        iF.addCategory("com.spotify.mobile.android.service.SpotifyIntentService");
+        iF.addCategory("com.spotify.mobile.android.service.SpotifyService");
+     
+     
+        iF.addAction("com.spotify.mobile.android.ui.widget.SpotifyWidget");
+        iF.addAction("ComponentInfo");
+        iF.addAction("com.spotify");
+        iF.addAction("com.spotify.mobile.android.service.SpotifyIntentService");
+        iF.addAction("com.spotify.mobile.android.service.SpotifyService");
+     
+     
+        iF.addAction("com.android.music.metachanged");
+        iF.addAction("com.android.music.playstatechanged");
+        iF.addAction("com.android.music.playbackcomplete");
+        iF.addAction("com.android.music.queuechanged");
+        iF.addAction("com.spotify.mobile.android.ui");
+     
+        registerReceiver(mReceiver, iF);
+     
+        // albumtext = (TextView) findViewById(R.id.albumText);
         datasource = new SongsDataSource(this);
         datasource.open();
 
@@ -72,38 +97,32 @@ public class MainActivity extends FragmentActivity implements
             public void onPageScrollStateChanged(int arg0) {
             }
         });
-        IntentFilter iF = new IntentFilter();
-        iF.addAction("com.android.music.metachanged");
-        
-        // MIUI music player
-        iF.addAction("com.miui.player.metachanged");
- 
-        // HTC music player
-        iF.addAction("com.htc.music.metachanged");
- 
-        // WinAmp
-        iF.addAction("com.nullsoft.winamp.metachanged");
- 
-        // MyTouch4G
-        iF.addAction("com.real.IMP.metachanged");
-
-		registerReceiver(mReceiver, iF);
     }
     
     private BroadcastReceiver mReceiver = new BroadcastReceiver() {
+    	 
+        @Override
+        public void onReceive(Context context, Intent intent)
+        {
 
-		@Override
-		public void onReceive(Context context, Intent intent) {
-			String action = intent.getAction();
-			String cmd = intent.getStringExtra("command");
-			Log.d("mIntentReceiver.onReceive ", action + " / " + cmd);
-			String artist = intent.getStringExtra("artist");
-			String album = intent.getStringExtra("album");
-			String track = intent.getStringExtra("track");
-			Log.d("Music", artist + ":" + album + ":" + track);
-			//datasource.createSong(track, artist, album);
-		}
-	};
+            Log.d("onReceive launched", "kekse");
+
+                    String action = intent.getAction();
+                    String cmd = intent.getStringExtra("command");
+
+                    String com = intent.getStringExtra("ComponentInfo");
+
+                    Log.d("mIntentReceiver.onReceive ", action + " / " + cmd+ " / "+ com);
+
+                    String artist = intent.getStringExtra("artist");
+                    String album = intent.getStringExtra("album");
+                    String track = intent.getStringExtra("track");
+                    Log.d("Music",artist+":"+album+":"+track);
+
+                    Toast.makeText(context, "Command : "+cmd+"n Artist : "+artist+" Album :"+album+"Track : "+track+" " , Toast.LENGTH_SHORT).show();
+
+        }
+};
  
     @Override
     public void onTabReselected(Tab tab, FragmentTransaction ft) {
