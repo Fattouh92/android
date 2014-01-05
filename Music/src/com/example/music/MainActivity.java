@@ -1,5 +1,8 @@
 package com.example.music;
 
+import java.util.HashSet;
+import java.util.Set;
+
 import android.app.ActionBar;
 import android.app.ActionBar.Tab;
 import android.app.FragmentTransaction;
@@ -7,6 +10,7 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.view.ViewPager;
@@ -30,11 +34,14 @@ public class MainActivity extends FragmentActivity implements
 	public static final String CMDPREVIOUS = "previous";
 	public static final String CMDNEXT = "next";
 	public static String lastSong = "";
-	public static String lastArtist = "";
+	public static final String PREFS_NAME = "MyPrefsFile";
  
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        SharedPreferences settings = getSharedPreferences(PREFS_NAME, 0);
+        lastSong = settings.getString("storedString", "");
+        Toast.makeText(getApplicationContext(), "last song: "+lastSong,Toast.LENGTH_LONG).show();
         setContentView(R.layout.activity_main);
         IntentFilter iF = new IntentFilter();
         
@@ -119,11 +126,19 @@ public class MainActivity extends FragmentActivity implements
            //Log.d("Music",artist+":"+album+":"+track);
             	//Toast.makeText(context, "Artist : "+artist+" Album :"+album+" Track : "+track+" " , Toast.LENGTH_SHORT).show();
             	try{
-            		if (!lastSong.equals(track) || !lastArtist.equals(artist)) {
+            		if (!lastSong.equals(track)) {
             			datasource.createSong(track, artist, album);
             			TimelineActivity.files.notifyDataSetChanged();
                 		lastSong = track;
-                    	lastArtist = artist;
+                    	SharedPreferences settings = getSharedPreferences(PREFS_NAME, 0);
+                        SharedPreferences.Editor editor = settings.edit();
+                        Set<String> s = new HashSet<String>();
+                        s.add(artist);
+                        s.add(track);
+                        editor.putStringSet("details", s);
+
+                        // Commit the edits!
+                        editor.commit();
             		}
             	} catch (Exception e) {
             		Toast.makeText(context, "Cannot save this song" , Toast.LENGTH_SHORT).show();
@@ -150,7 +165,21 @@ public class MainActivity extends FragmentActivity implements
     protected void onResume() {
       datasource.open();
       super.onResume();
+      try{
+    	  TimelineActivity.files.notifyDataSetChanged();  
+      } catch (Exception e) {
+    	  Toast.makeText(getApplicationContext(), "error",Toast.LENGTH_LONG).show();
+      }
     }
+    
+    protected void onStop(){
+        super.onStop();
+
+        SharedPreferences settings = getSharedPreferences(PREFS_NAME, 0);
+        SharedPreferences.Editor editor = settings.edit();
+        editor.putString("storedString", lastSong); // value to store
+        editor.commit();
+     }
 
     /*@Override
     protected void onPause() {
