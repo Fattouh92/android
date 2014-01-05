@@ -72,7 +72,60 @@ public class SongsDataSource {
     cursor.close();
     return songs;
   }
+  public List<String> getMostPlayedSongs() {
+	  ArrayList<String> allsongs = new ArrayList<String>();
+	  Cursor c = database.query( MySQLiteHelper.TABLE_SONGS, new String[]{MySQLiteHelper.SONG_NAME},null,null,null,null,
+	          MySQLiteHelper.SONG_NAME);
 
+	  allsongs.clear();
+	  if (c != null)
+	      c.moveToFirst();
+	  for (int i = 0; c.getCount() > i; i++) {
+
+	      String song1 = c.getString(0);
+
+	      allsongs.add(song1);
+	      c.moveToNext();
+
+	  }
+	  return MostPlayedActivity.searchAndDisplay(allsongs);
+	  }
+  public List<String> getFavoriteArtist() {
+	  ArrayList<String> allsongs = new ArrayList<String>();
+	  Cursor c = database.query( MySQLiteHelper.TABLE_SONGS, new String[]{MySQLiteHelper.ARTIST_NAME},null,null,null,null,
+	          MySQLiteHelper.ARTIST_NAME);
+
+	  allsongs.clear();
+	  if (c != null)
+	      c.moveToFirst();
+	  for (int i = 0; c.getCount() > i; i++) {
+
+	      String song1 = c.getString(0);
+
+	      allsongs.add(song1);
+	      c.moveToNext();
+
+	  }
+	  return ThirdActivity.searchAndDisplay(allsongs);
+	  }
+  public List<String> getFavoriteAlbums() {
+	  ArrayList<String> allsongs = new ArrayList<String>();
+	  Cursor c = database.query( MySQLiteHelper.TABLE_SONGS, new String[]{MySQLiteHelper.ALBUM_NAME},null,null,null,null,
+	          MySQLiteHelper.ALBUM_NAME);
+
+	  allsongs.clear();
+	  if (c != null)
+	      c.moveToFirst();
+	  for (int i = 0; c.getCount() > i; i++) {
+
+	      String song1 = c.getString(0);
+
+	      allsongs.add(song1);
+	      c.moveToNext();
+
+	  }
+	  return ThirdActivity.searchAndDisplay(allsongs);
+	  }
   private Song cursorToSong(Cursor cursor) {
     Song song = new Song();
     song.setId(cursor.getLong(0));

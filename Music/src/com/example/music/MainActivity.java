@@ -55,7 +55,7 @@ public class MainActivity extends FragmentActivity implements
         iF.addAction("com.android.music.playstatechanged");
         iF.addAction("com.android.music.playbackcomplete");
         iF.addAction("com.android.music.queuechanged");
-        iF.addAction("com.spotify.mobile.android.ui");
+        //iF.addAction("com.spotify.mobile.android.ui");
      
         registerReceiver(mReceiver, iF);
      
@@ -117,11 +117,11 @@ public class MainActivity extends FragmentActivity implements
             String album = intent.getStringExtra("album");
             String track = intent.getStringExtra("track");
            //Log.d("Music",artist+":"+album+":"+track);
-            	Toast.makeText(context, "Artist : "+artist+" Album :"+album+" Track : "+track+" " , Toast.LENGTH_SHORT).show();
+            	//Toast.makeText(context, "Artist : "+artist+" Album :"+album+" Track : "+track+" " , Toast.LENGTH_SHORT).show();
             	try{
             		if (!lastSong.equals(track) || !lastArtist.equals(artist)) {
             			datasource.createSong(track, artist, album);
-            			//TimelineActivity.files	.notifyDataSetChanged();
+            			TimelineActivity.files.notifyDataSetChanged(); 
                 		lastSong = track;
                     	lastArtist = artist;
             		}

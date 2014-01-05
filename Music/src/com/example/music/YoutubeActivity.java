@@ -11,31 +11,13 @@ import com.google.android.youtube.player.YouTubeInitializationResult;
 import com.google.android.youtube.player.YouTubePlayer;
 import com.google.android.youtube.player.YouTubePlayerView;
 import com.google.android.youtube.player.YouTubePlayer.Provider;
-//import com.google.api.client.googleapis.json.GoogleJsonResponseException;
-//import com.google.api.client.http.HttpRequest;
-//import com.google.api.client.http.HttpRequestInitializer;
-//import com.google.api.services.samples.youtube.cmdline.Auth;
-//import com.google.api.services.youtube.YouTube;
-//import com.google.api.services.youtube.model.SearchListResponse;
-//import com.google.api.services.youtube.model.SearchResult;
 
 import android.widget.Toast;
-
-
-//import com.google.api.services.youtube.model.ResourceId;
 
 public class YoutubeActivity extends YouTubeBaseActivity implements
 YouTubePlayer.OnInitializedListener {
 	static private final String DEVELOPER_KEY = "AIzaSyB6bkhkb_fVRpUyTmLnbsQUzYmeVxm1ovg";
-	 static private String VIDEO = "";
-
-	    private static final long NUMBER_OF_VIDEOS_RETURNED = 25;
-
-	    /**
-	     * Define a global instance of a Youtube object, which will be used
-	     * to make YouTube Data API requests.
-	     */
-	//    private static YouTube youtube;
+	 static private final String VIDEO = "If5MF4wm1T8";
 	 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {

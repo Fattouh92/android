@@ -6,5 +6,7 @@
     <string name="hello_world">Hello world!</string>
     <string name="title_activity_media_player">MediaPlayer</string>
     <string name="title_activity_youtube">YoutubeActivity</string>
+    <string name="name_label1">Favorite Artists:</string>
+     <string name="name_label2">Favorite Albums:</string>
 
 </resources>
