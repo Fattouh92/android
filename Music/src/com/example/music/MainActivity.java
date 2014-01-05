@@ -22,13 +22,13 @@ public class MainActivity extends FragmentActivity implements
     private ActionBar actionBar;
     // Tab titles
     private String[] tabs = { "Timeline", "Most Played", "Third" };
-    /*public static final String SERVICECMD = "com.android.music.musicservicecommand";
+    public static final String SERVICECMD = "com.android.music.musicservicecommand";
 	public static final String CMDNAME = "command";
 	public static final String CMDTOGGLEPAUSE = "togglepause";
 	public static final String CMDSTOP = "stop";
 	public static final String CMDPAUSE = "pause";
 	public static final String CMDPREVIOUS = "previous";
-	public static final String CMDNEXT = "next";*/
+	public static final String CMDNEXT = "next";
 	public static String lastSong = "";
 	public static String lastArtist = "";
  
@@ -117,11 +117,11 @@ public class MainActivity extends FragmentActivity implements
             String album = intent.getStringExtra("album");
             String track = intent.getStringExtra("track");
            //Log.d("Music",artist+":"+album+":"+track);
-            	Toast.makeText(context, "Artist : "+artist+" Album :"+album+" Track : "+track+" " , Toast.LENGTH_SHORT).show();
+            	//Toast.makeText(context, "Artist : "+artist+" Album :"+album+" Track : "+track+" " , Toast.LENGTH_SHORT).show();
             	try{
             		if (!lastSong.equals(track) || !lastArtist.equals(artist)) {
             			datasource.createSong(track, artist, album);
-            			//TimelineActivity.files	.notifyDataSetChanged();
+            			TimelineActivity.files.notifyDataSetChanged();
                 		lastSong = track;
                     	lastArtist = artist;
             		}

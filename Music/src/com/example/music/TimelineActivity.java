@@ -15,7 +15,7 @@ import android.widget.Toast;
  
 public class TimelineActivity extends Fragment {
 	ListView lv1;
-	static ArrayAdapter<Song> files;
+	public static ArrayAdapter<Song> files;
 	List<Song> values;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -37,7 +37,7 @@ public class TimelineActivity extends Fragment {
             lv1.setAdapter(files);
           lv1.setOnItemClickListener(new AdapterView.OnItemClickListener() {
              public void onItemClick(AdapterView<?> av, View view, int i, long l) {
-                 Toast.makeText(getActivity(), "mysong "+values.get(i).getSong_name(), Toast.LENGTH_LONG).show();
+                 //Toast.makeText(getActivity(), "mysong "+values.get(i).getSong_name(), Toast.LENGTH_LONG).show();
                  //long id = values.get(i).getId();
                  Intent intent = new Intent(getActivity(), YoutubeActivity.class);
                  intent.putExtra("song", values.get(i).getSong_name());
