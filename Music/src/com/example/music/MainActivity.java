@@ -53,7 +53,7 @@ public class MainActivity extends FragmentActivity implements
         iF.addAction("com.android.music.playstatechanged");
         iF.addAction("com.android.music.playbackcomplete");
         iF.addAction("com.android.music.queuechanged");
-        iF.addAction("com.spotify.mobile.android.ui");
+        //iF.addAction("com.spotify.mobile.android.ui");
      
         registerReceiver(mReceiver, iF);
      
