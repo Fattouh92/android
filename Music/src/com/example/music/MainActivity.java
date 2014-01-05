@@ -121,6 +121,7 @@ public class MainActivity extends FragmentActivity implements
             	try{
             		if (!lastSong.equals(track) || !lastArtist.equals(artist)) {
             			datasource.createSong(track, artist, album);
+            			//TimelineActivity.files	.notifyDataSetChanged();
                 		lastSong = track;
                     	lastArtist = artist;
             		}
