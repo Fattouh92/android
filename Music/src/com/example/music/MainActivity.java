@@ -166,6 +166,8 @@ public class MainActivity extends FragmentActivity implements
       datasource.open();
       super.onResume();
       try{
+    	  TimelineActivity.values.clear();
+    	  TimelineActivity.values.addAll(datasource.getAllSongs());
     	  TimelineActivity.files.notifyDataSetChanged();  
       } catch (Exception e) {
     	  Toast.makeText(getApplicationContext(), "error",Toast.LENGTH_LONG).show();
