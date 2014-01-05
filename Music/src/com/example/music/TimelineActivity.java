@@ -7,10 +7,8 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
-import android.widget.Toast;
  
 public class TimelineActivity extends Fragment {
 	ListView lv1;
@@ -32,11 +30,7 @@ public class TimelineActivity extends Fragment {
                     values);
 
             lv1.setAdapter(files);
-          lv1.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-             public void onItemClick(AdapterView<?> av, View view, int i, long l) {
-                 Toast.makeText(getActivity(), "myPos "+i, Toast.LENGTH_LONG).show();
-             }
-         });
+         
         return rootView;
     }
  

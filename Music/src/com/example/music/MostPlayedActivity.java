@@ -17,7 +17,7 @@ public class MostPlayedActivity extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
             Bundle savedInstanceState) {
  
-    	View rootView = inflater.inflate(R.layout.activity_timeline, container, false);
+    	View rootView = inflater.inflate(R.layout.activity_most_played, container, false);
         lv2 = (ListView) rootView.findViewById(R.id.listview2);
         
         List<String> values = MainActivity.datasource.getMostPlayedSongs();
@@ -25,7 +25,7 @@ public class MostPlayedActivity extends Fragment {
            ArrayAdapter<String> files = new ArrayAdapter<String>(getActivity(), 
                     android.R.layout.simple_list_item_1, 
                     values);
-
+System.out.println(files.getItem(0));
             lv2.setAdapter(files);
          
         return rootView;
@@ -45,12 +45,9 @@ public class MostPlayedActivity extends Fragment {
                    list2.set(list1.size()-1, 1);
             }
         }
-        for (int i = 0; i < list1.size(); i++) {
-            System.out.println("Number " + list1.get(i) + " occurs "
-                    + list2.get(i) + " times.");
-
-        }
-        while(list3.size()<25){
+        while(list3.size()<25 && list3.size()<= list2.size()){
+        	if(!list2.isEmpty()){
+        		
         int maxCount = 0;
         int index = -1;
         for (int i = 0; i < list2.size(); i++) {
@@ -59,9 +56,11 @@ public class MostPlayedActivity extends Fragment {
                 index = i;
             }
         }
+        if(index != -1){
         list3.add(list1.get(index));
         list1.remove(index);
         list2.remove(index);
         }
+        }}
  return list3;
 }}
