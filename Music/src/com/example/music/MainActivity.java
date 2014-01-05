@@ -22,13 +22,15 @@ public class MainActivity extends FragmentActivity implements
     private ActionBar actionBar;
     // Tab titles
     private String[] tabs = { "Timeline", "Most Played", "Third" };
-    public static final String SERVICECMD = "com.android.music.musicservicecommand";
+    /*public static final String SERVICECMD = "com.android.music.musicservicecommand";
 	public static final String CMDNAME = "command";
 	public static final String CMDTOGGLEPAUSE = "togglepause";
 	public static final String CMDSTOP = "stop";
 	public static final String CMDPAUSE = "pause";
 	public static final String CMDPREVIOUS = "previous";
-	public static final String CMDNEXT = "next";
+	public static final String CMDNEXT = "next";*/
+	public static String lastSong = "";
+	public static String lastArtist = "";
  
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -104,23 +106,27 @@ public class MainActivity extends FragmentActivity implements
         @Override
         public void onReceive(Context context, Intent intent)
         {
+        	//String action = intent.getAction();
+            //String cmd = intent.getStringExtra("command");
 
-            Log.d("onReceive launched", "kekse");
+            //String com = intent.getStringExtra("ComponentInfo");
 
-                    String action = intent.getAction();
-                    String cmd = intent.getStringExtra("command");
+            //Log.d("mIntentReceiver.onReceive ", action + " / " + cmd+ " / "+ com);
 
-                    String com = intent.getStringExtra("ComponentInfo");
-
-                    Log.d("mIntentReceiver.onReceive ", action + " / " + cmd+ " / "+ com);
-
-                    String artist = intent.getStringExtra("artist");
-                    String album = intent.getStringExtra("album");
-                    String track = intent.getStringExtra("track");
-                    Log.d("Music",artist+":"+album+":"+track);
-
-                    Toast.makeText(context, "Command : "+cmd+"n Artist : "+artist+" Album :"+album+"Track : "+track+" " , Toast.LENGTH_SHORT).show();
-
+            String artist = intent.getStringExtra("artist");
+            String album = intent.getStringExtra("album");
+            String track = intent.getStringExtra("track");
+           //Log.d("Music",artist+":"+album+":"+track);
+            	Toast.makeText(context, "Artist : "+artist+" Album :"+album+" Track : "+track+" " , Toast.LENGTH_SHORT).show();
+            	try{
+            		if (!lastSong.equals(track) || !lastArtist.equals(artist)) {
+            			datasource.createSong(track, artist, album);
+                		lastSong = track;
+                    	lastArtist = artist;
+            		}
+            	} catch (Exception e) {
+            		Toast.makeText(context, "Cannot save this song" , Toast.LENGTH_SHORT).show();
+            	}
         }
 };
  
@@ -145,9 +151,9 @@ public class MainActivity extends FragmentActivity implements
       super.onResume();
     }
 
-    @Override
+    /*@Override
     protected void onPause() {
       datasource.close();
       super.onPause();
-    }
+    }*/
 }
