@@ -128,6 +128,8 @@ public class MainActivity extends FragmentActivity implements
             	} catch (Exception e) {
             		Toast.makeText(context, "Cannot save this song" , Toast.LENGTH_SHORT).show();
             	}
+            	MostPlayedActivity.files.notifyDataSetChanged();
+            	ThirdActivity.files.notifyDataSetChanged();
         }
 };
  

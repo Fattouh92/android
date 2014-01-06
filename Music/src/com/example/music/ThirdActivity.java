@@ -14,6 +14,8 @@ import android.widget.ListView;
 public class ThirdActivity extends Fragment {
         ListView lv3;
         ListView lv4;
+        static ArrayAdapter<String> files;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
             Bundle savedInstanceState) {
@@ -23,7 +25,7 @@ public class ThirdActivity extends Fragment {
         
         List<String> values = MainActivity.datasource.getFavoriteArtist();
 
-           ArrayAdapter<String> files = new ArrayAdapter<String>(getActivity(), 
+           files = new ArrayAdapter<String>(getActivity(), 
                     android.R.layout.simple_list_item_1, 
                     values);
 
