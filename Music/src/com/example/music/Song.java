@@ -2,7 +2,7 @@ package com.example.music;
 
 public class Song {
   private long id;
-  private String song_name;
+   String song_name;  //i changed it from private
   private String artist_name;
   private String album_name;
 

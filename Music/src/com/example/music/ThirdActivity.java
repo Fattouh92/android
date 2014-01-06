@@ -15,6 +15,9 @@ public class ThirdActivity extends Fragment {
         ListView lv3;
         ListView lv4;
         static ArrayAdapter<String> files;
+		public static List<String> values;
+		public static List<String> values2;
+		public static ArrayAdapter<String> files2;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -23,7 +26,7 @@ public class ThirdActivity extends Fragment {
             View rootView = inflater.inflate(R.layout.activity_third, container, false);
         lv3 = (ListView) rootView.findViewById(R.id.listview3);
         
-        List<String> values = MainActivity.datasource.getFavoriteArtist();
+         values = MainActivity.datasource.getFavoriteArtist();
 
            files = new ArrayAdapter<String>(getActivity(), 
                     android.R.layout.simple_list_item_1, 
@@ -32,9 +35,9 @@ public class ThirdActivity extends Fragment {
             lv3.setAdapter(files);
             lv4 = (ListView) rootView.findViewById(R.id.listview4);
             
-            List<String> values2 = MainActivity.datasource.getFavoriteArtist();
+             values2 = MainActivity.datasource.getFavoriteAlbums();
 
-               ArrayAdapter<String> files2 = new ArrayAdapter<String>(getActivity(), 
+                files2 = new ArrayAdapter<String>(getActivity(), 
                         android.R.layout.simple_list_item_1, 
                         values2);
 

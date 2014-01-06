@@ -8,20 +8,25 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
  
 public class MostPlayedActivity extends Fragment {
+
         ListView lv2;
         static ArrayAdapter<String> files;
+		public static List<String> values;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
             Bundle savedInstanceState) {
- 
+
             View rootView = inflater.inflate(R.layout.activity_most_played, container, false);
+
         lv2 = (ListView) rootView.findViewById(R.id.listview2);
         
-        List<String> values = MainActivity.datasource.getMostPlayedSongs();
+         values = MainActivity.datasource.getMostPlayedSongs();
 
            files = new ArrayAdapter<String>(getActivity(), 
                     android.R.layout.simple_list_item_1, 
@@ -64,4 +69,6 @@ System.out.println(files.getItem(0));
         }
         }}
  return list3;
+
 }}
+

@@ -8,6 +8,7 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
+import android.util.Log;
 
 public class SongsDataSource {
 
@@ -20,10 +21,12 @@ public class SongsDataSource {
 
   public SongsDataSource(Context context) {
     dbHelper = new MySQLiteHelper(context);
+    
   }
 
   public void open() throws SQLException {
     database = dbHelper.getWritableDatabase();
+  
   }
 
   public void close() {
@@ -81,6 +84,7 @@ public class SongsDataSource {
     song.setAlbum_name(cursor.getString(3));
     return song;
   }
+
   public List<String> getMostPlayedSongs() {
       ArrayList<String> allsongs = new ArrayList<String>();
       Cursor c = database.query( MySQLiteHelper.TABLE_SONGS, new String[]{MySQLiteHelper.SONG_NAME},null,null,null,null,
@@ -148,4 +152,5 @@ public List<String> getFavoriteAlbums() {
       }
       return ThirdActivity.searchAndDisplay(allsongs);
       }
+
 } 
