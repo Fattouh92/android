@@ -81,4 +81,71 @@ public class SongsDataSource {
     song.setAlbum_name(cursor.getString(3));
     return song;
   }
+  public List<String> getMostPlayedSongs() {
+      ArrayList<String> allsongs = new ArrayList<String>();
+      Cursor c = database.query( MySQLiteHelper.TABLE_SONGS, new String[]{MySQLiteHelper.SONG_NAME},null,null,null,null,
+              MySQLiteHelper.SONG_NAME);
+
+      allsongs.clear();
+      if (c != null)
+          c.moveToFirst();
+      for (int i = 0; c.getCount() > i; i++) {
+
+          String song1 = c.getString(0);
+
+          allsongs.add(song1);
+          c.moveToNext();
+
+      }
+      if(allsongs.isEmpty()){
+    	  allsongs.add("No Songs");
+    	  return allsongs;
+      }
+      return MostPlayedActivity.searchAndDisplay(allsongs);
+      }
+  
+  public List<String> getFavoriteArtist() {
+      ArrayList<String> allsongs = new ArrayList<String>();
+      Cursor c = database.query( MySQLiteHelper.TABLE_SONGS, new String[]{MySQLiteHelper.ARTIST_NAME},null,null,null,null,
+              MySQLiteHelper.ARTIST_NAME);
+
+      allsongs.clear();
+      if (c != null)
+          c.moveToFirst();
+      for (int i = 0; c.getCount() > i; i++) {
+
+          String song1 = c.getString(0);
+
+          allsongs.add(song1);
+          c.moveToNext();
+
+      }
+      if(allsongs.isEmpty()){
+    	  allsongs.add("No Artists");
+    	  return allsongs;
+      }
+      return ThirdActivity.searchAndDisplay(allsongs);
+      }
+public List<String> getFavoriteAlbums() {
+      ArrayList<String> allsongs = new ArrayList<String>();
+      Cursor c = database.query( MySQLiteHelper.TABLE_SONGS, new String[]{MySQLiteHelper.ALBUM_NAME},null,null,null,null,
+              MySQLiteHelper.ALBUM_NAME);
+
+      allsongs.clear();
+      if (c != null)
+          c.moveToFirst();
+      for (int i = 0; c.getCount() > i; i++) {
+
+          String song1 = c.getString(0);
+
+          allsongs.add(song1);
+          c.moveToNext();
+
+      }
+      if(allsongs.isEmpty()){
+    	  allsongs.add("No Albums");
+    	  return allsongs;
+      }
+      return ThirdActivity.searchAndDisplay(allsongs);
+      }
 } 
