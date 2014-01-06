@@ -12,12 +12,12 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
  
 public class MostPlayedActivity extends Fragment {
-	ListView lv2;
+        ListView lv2;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
             Bundle savedInstanceState) {
  
-    	View rootView = inflater.inflate(R.layout.activity_most_played, container, false);
+            View rootView = inflater.inflate(R.layout.activity_most_played, container, false);
         lv2 = (ListView) rootView.findViewById(R.id.listview2);
         
         List<String> values = MainActivity.datasource.getMostPlayedSongs();
@@ -38,16 +38,16 @@ System.out.println(files.getItem(0));
         for (int i = 0; i < arr.size(); i++) {
             int index = list1.indexOf(arr.get(i));
             if (index != -1) {
-            	int newCount = list2.get(index)+1;
+                    int newCount = list2.get(index)+1;
               list2.set(index,newCount);
             } else {
-            	   list1.add(arr.get(i));
+                       list1.add(arr.get(i));
                    list2.set(list1.size()-1, 1);
             }
         }
         while(list3.size()<25 && list3.size()<= list2.size()){
-        	if(!list2.isEmpty()){
-        		
+                if(!list2.isEmpty()){
+                        
         int maxCount = 0;
         int index = -1;
         for (int i = 0; i < list2.size(); i++) {

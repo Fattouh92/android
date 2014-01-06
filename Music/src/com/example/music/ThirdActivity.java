@@ -12,13 +12,13 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
  
 public class ThirdActivity extends Fragment {
-	ListView lv3;
-	ListView lv4;
+        ListView lv3;
+        ListView lv4;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
             Bundle savedInstanceState) {
  
-    	View rootView = inflater.inflate(R.layout.activity_timeline, container, false);
+            View rootView = inflater.inflate(R.layout.activity_third, container, false);
         lv3 = (ListView) rootView.findViewById(R.id.listview3);
         
         List<String> values = MainActivity.datasource.getFavoriteArtist();
@@ -47,10 +47,10 @@ public class ThirdActivity extends Fragment {
         for (int i = 0; i < arr.size(); i++) {
             int index = list1.indexOf(arr.get(i));
             if (index != -1) {
-            	int newCount = list2.get(index)+1;
+                    int newCount = list2.get(index)+1;
               list2.set(index,newCount);
             } else {
-            	   list1.add(arr.get(i));
+                       list1.add(arr.get(i));
                    list2.set(list1.size()-1, 1);
             }
         }
