@@ -162,7 +162,7 @@ ActionBar.TabListener {
 			TimelineActivity.values.clear(); 
 			TimelineActivity.values.addAll(datasource.getAllSongs()); 
 			TimelineActivity.files.notifyDataSetChanged(); 
-			MostPlayedActivity.values.clear(); 
+			/*MostPlayedActivity.values.clear(); 
 			MostPlayedActivity.values.addAll(datasource.getMostPlayedSongs()); 
 			MostPlayedActivity.files.notifyDataSetChanged(); 
 			ThirdActivity.values.clear(); 
@@ -170,7 +170,7 @@ ActionBar.TabListener {
 			ThirdActivity.values.addAll(datasource.getFavoriteArtist()); 
 			ThirdActivity.values2.addAll(datasource.getFavoriteAlbums()); 
 			ThirdActivity.files.notifyDataSetChanged(); 
-			ThirdActivity.files2.notifyDataSetChanged(); 
+			ThirdActivity.files2.notifyDataSetChanged();*/
 		} catch (Exception e) { 
 			Toast.makeText(getApplicationContext(), "error",Toast.LENGTH_LONG).show(); }
 	}
