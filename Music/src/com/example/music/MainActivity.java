@@ -130,15 +130,6 @@ public class MainActivity extends FragmentActivity implements
             			datasource.createSong(track, artist, album);
             			TimelineActivity.files.notifyDataSetChanged();
                 		lastSong = track;
-                    	SharedPreferences settings = getSharedPreferences(PREFS_NAME, 0);
-                        SharedPreferences.Editor editor = settings.edit();
-                        Set<String> s = new HashSet<String>();
-                        s.add(artist);
-                        s.add(track);
-                        editor.putStringSet("details", s);
-
-                        // Commit the edits!
-                        editor.commit();
             		}
             	} catch (Exception e) {
             		Toast.makeText(context, "Cannot save this song" , Toast.LENGTH_SHORT).show();
