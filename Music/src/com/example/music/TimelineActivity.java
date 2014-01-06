@@ -16,7 +16,7 @@ import android.widget.Toast;
 public class TimelineActivity extends Fragment {
 	ListView lv1;
 	public static ArrayAdapter<Song> files;
-	List<Song> values;
+	static List<Song> values;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
             Bundle savedInstanceState) {

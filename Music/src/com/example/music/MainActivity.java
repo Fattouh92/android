@@ -130,6 +130,7 @@ public class MainActivity extends FragmentActivity implements
             	}
             	MostPlayedActivity.files.notifyDataSetChanged();
             	ThirdActivity.files.notifyDataSetChanged();
+            	ThirdActivity.files2.notifyDataSetChanged();
         }
 };
  
@@ -152,6 +153,20 @@ public class MainActivity extends FragmentActivity implements
     protected void onResume() {
       datasource.open();
       super.onResume();
+      try{ 
+    	  TimelineActivity.values.clear(); 
+    	  TimelineActivity.values.addAll(datasource.getAllSongs()); 
+    	  TimelineActivity.files.notifyDataSetChanged(); 
+    	  MostPlayedActivity.values.clear(); 
+    	  MostPlayedActivity.values.addAll(datasource.getMostPlayedSongs()); 
+    	  MostPlayedActivity.files.notifyDataSetChanged(); 
+    	  ThirdActivity.values.clear(); 
+    	  ThirdActivity.values2.clear(); 
+    	  ThirdActivity.values.addAll(datasource.getFavoriteArtist()); 
+    	  ThirdActivity.values2.addAll(datasource.getFavoriteAlbums()); 
+    	  ThirdActivity.files.notifyDataSetChanged(); 
+    	  ThirdActivity.files2.notifyDataSetChanged(); 
+    	  } catch (Exception e) { Toast.makeText(getApplicationContext(), "error",Toast.LENGTH_LONG).show(); }
     }
 
     /*@Override
